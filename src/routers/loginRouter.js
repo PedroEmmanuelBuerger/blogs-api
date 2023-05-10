@@ -4,13 +4,13 @@ const { loginUser } = require('../controllers/login.controller');
 
 const { verifyNameAndPass, verifyUserExist } = require('../middlewares/loginMiddle');
 
-const loginRouter = express.Router();
+const loginRoute = express.Router();
 
-loginRouter.post(
+loginRoute.post(
 '/', 
 verifyNameAndPass,
 verifyUserExist, 
 loginUser,
 );
 
-module.exports = loginRouter;
+module.exports = loginRoute;
