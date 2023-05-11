@@ -16,7 +16,10 @@ const addUser = async ({ displayName, email, password, image }) => {
     return { type: null, message: user.dataValues };
 };
 
+const getAll = async () => User.findAll();
+
 module.exports = {
     getUser,
     addUser,
+    getAll,
 };
