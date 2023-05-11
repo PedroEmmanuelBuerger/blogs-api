@@ -11,7 +11,7 @@ const verifyNameAndPass = async (req, _res, next) => {
 const verifyUserExist = async (req, _res, next) => {
     const { email, password } = req.body;
     const user = await getUser(email);
-
+    req.user = user;
     if (!user || user.password !== password) {
         return next({ status: 400, message: 'Invalid fields' });
     }
