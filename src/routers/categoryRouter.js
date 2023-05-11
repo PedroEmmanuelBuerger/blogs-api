@@ -1,6 +1,7 @@
 const express = require('express');
 
-const { createNewCatgory } = require('../controllers/category.controller');
+const { createNewCatgory, getAllCategories } = require('../controllers/category.controller');
+
 const { tokenVerify } = require('../middlewares/tokenMiddle');
 const { validateCatName } = require('../middlewares/categoryMiddle');
 
@@ -11,6 +12,12 @@ categoryRoute.post(
     tokenVerify,
     validateCatName,
     createNewCatgory,
+);
+
+categoryRoute.get(
+    '/',
+    tokenVerify,
+    getAllCategories,
 );
 
 module.exports = categoryRoute;
