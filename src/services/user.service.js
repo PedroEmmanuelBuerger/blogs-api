@@ -18,8 +18,17 @@ const addUser = async ({ displayName, email, password, image }) => {
 
 const getAll = async () => User.findAll();
 
+const getById = async (id) => {
+   const user = await User.findByPk(id);
+   if (!user) {
+    return { type: 'USER_NOT_FOUD', message: 'User does not exist' };
+   }
+   return { type: null, message: user };
+};
+
 module.exports = {
     getUser,
     addUser,
     getAll,
+    getById,
 };

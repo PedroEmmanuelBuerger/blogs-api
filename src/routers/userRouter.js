@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { createUser, getAllUsers } = require('../controllers/user.controller');
+const { createUser, getAllUsers, getUserById } = require('../controllers/user.controller');
 
 const { verifyDisplayName, verifyEmail, verifyPassword } = require('../middlewares/userMiddle');
 const { tokenVerify } = require('../middlewares/tokenMiddle');
@@ -19,6 +19,12 @@ userRouter.get(
     '/',
     tokenVerify,
     getAllUsers,
+);
+
+userRouter.get(
+    '/:id',
+    tokenVerify,
+    getUserById,
 );
 
 module.exports = userRouter;
