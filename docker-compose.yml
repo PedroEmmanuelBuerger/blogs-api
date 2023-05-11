@@ -3,10 +3,10 @@ version: "3"
 services:
   # Serviço que irá rodar o node
   node:
+    user: node
     # Faz o build do Dockerfile da pasta atual e utiliza o resultado desse build
     # como a imagem do container
-    image: blogs_api
-    build: .
+    image: node:16
     # Nome do container para facilitar execução
     container_name: blogs_api
     # Mesmo que `docker run -t`
