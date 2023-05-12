@@ -1,6 +1,6 @@
 const { verifyToken } = require('../auth/authfunctions');
 
-const { createPost, getAll } = require('../services/post.service');
+const { createPost, getAll, getById } = require('../services/post.service');
 
 const createPostCont = async (req, res) => {
     const { authorization } = req.headers;
@@ -18,7 +18,17 @@ const getAllPosts = async (_req, res) => {
   res.status(200).json(allPosts);
 };
 
+const getPost = async (req, res) => {
+  const { id } = req.params;
+  const post = await getById(id);
+  if (post.type) {
+    return res.status(404).json({ message: post.message });
+  }
+  return res.status(200).json(post.message);
+};
+
 module.exports = {
     createPostCont,
     getAllPosts,
+    getPost,
 };
