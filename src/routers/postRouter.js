@@ -1,9 +1,10 @@
 const express = require('express');
 
-const { validadeNewPost } = require('../middlewares/postMiddle');
+const { validadeNewPost, validateUpdatePost } = require('../middlewares/postMiddle');
 const { tokenVerify } = require('../middlewares/tokenMiddle');
 
-const { createPostCont, getAllPosts, getPost } = require('../controllers/post.controller');
+const { createPostCont, getAllPosts,
+     getPost, UpdateAPost } = require('../controllers/post.controller');
 
 const postRouter = express.Router();
 
@@ -24,6 +25,13 @@ postRouter.get(
 '/:id',
 tokenVerify,
 getPost,
+);
+
+postRouter.put(
+'/:id',
+tokenVerify,
+validateUpdatePost,
+UpdateAPost,
 );
 
 module.exports = postRouter;
