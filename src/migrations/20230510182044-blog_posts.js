@@ -34,10 +34,12 @@ module.exports = {
         },
       },
       published: {
+        defaultValue: Sequelize.fn('now'),
         allowNull: false,
         type: Sequelize.DATE,
       },
       updated: {
+        defaultValue: Sequelize.fn('now'),
         allowNull: false,
         type: Sequelize.DATE,
       },
