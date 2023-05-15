@@ -1,5 +1,5 @@
-const { createTOken } = require('../auth/authfunctions');
-const { addUser, getAll, getById } = require('../services/user.service');
+const { createTOken, verifyToken } = require('../auth/authfunctions');
+const { addUser, getAll, getById, deleteUser } = require('../services/user.service');
 
 const createUser = async (req, res) => {
     const newUser = await addUser(req.body);
@@ -33,9 +33,18 @@ const getUserById = async (req, res) => {
     res.status(200).json(withouthPassword);
 };
 
+const deleteAuser = async (req, res) => {
+    const { authorization } = req.headers;
+    const user = verifyToken(authorization);
+    const { id } = user.data;
+    await deleteUser(id);
+    return res.status(204).json();
+};
+
 module.exports = {
     addUser,
     createUser,
     getAllUsers,
     getUserById,
+    deleteAuser,
 };

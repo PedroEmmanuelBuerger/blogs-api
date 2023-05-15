@@ -1,6 +1,7 @@
 const express = require('express');
 
-const { createUser, getAllUsers, getUserById } = require('../controllers/user.controller');
+const { createUser, getAllUsers,
+     getUserById, deleteAuser } = require('../controllers/user.controller');
 
 const { verifyDisplayName, verifyEmail, verifyPassword } = require('../middlewares/userMiddle');
 const { tokenVerify } = require('../middlewares/tokenMiddle');
@@ -25,6 +26,12 @@ userRouter.get(
     '/:id',
     tokenVerify,
     getUserById,
+);
+
+userRouter.delete(
+'/me',
+tokenVerify,
+deleteAuser,
 );
 
 module.exports = userRouter;
