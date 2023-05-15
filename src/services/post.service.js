@@ -14,10 +14,9 @@ const createPost = async (body, id) => {
 }
 
 const create = await BlogPost.create({ title, content, userId: id });
-
  categoryIds.forEach((catId) => PostCategory.create({ postId: create.id, categoryId: catId }));
 
-    const result = await BlogPost.findByPk(create.dataValues.id);
+    const result = await BlogPost.findByPk(create.id);
     return { type: null, message: result };
 };
 
@@ -79,9 +78,24 @@ const updatePost = async (body, postId, postUser) => {
       return { type: null, message: NewPost };
 };
 
+const deletePost = async (postUser, PostId) => {
+ const post = await BlogPost.findByPk(PostId);
+  if (!post) {
+    return { type: 'POST_NOT_EXIST', message: 'Post does not exist', status: 404 };
+  }
+  if (Number(postUser !== post.userId)) {
+    return { type: 'UNAUTHORIZED', message: 'Unauthorized user', status: 401 };
+}
+  const user = await BlogPost.destroy(
+    { where: { id: PostId } },
+  );
+  return { type: null, message: user };
+};
+
 module.exports = {
     createPost,
     getAll,
     getById,
     updatePost,
+    deletePost,
 };

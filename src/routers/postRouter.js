@@ -4,7 +4,7 @@ const { validadeNewPost, validateUpdatePost } = require('../middlewares/postMidd
 const { tokenVerify } = require('../middlewares/tokenMiddle');
 
 const { createPostCont, getAllPosts,
-     getPost, UpdateAPost } = require('../controllers/post.controller');
+     getPost, UpdateAPost, deleteApost } = require('../controllers/post.controller');
 
 const postRouter = express.Router();
 
@@ -32,6 +32,12 @@ postRouter.put(
 tokenVerify,
 validateUpdatePost,
 UpdateAPost,
+);
+
+postRouter.delete(
+'/:id',
+tokenVerify,
+deleteApost,
 );
 
 module.exports = postRouter;
