@@ -1,6 +1,7 @@
 const { verifyToken } = require('../auth/authfunctions');
 
-const { createPost, getAll, getById, updatePost, deletePost } = require('../services/post.service');
+const { createPost, getAll, getById,
+   updatePost, deletePost, searchPost } = require('../services/post.service');
 
 const createPostCont = async (req, res) => {
     const { authorization } = req.headers;
@@ -49,10 +50,17 @@ const deleteApost = async (req, res) => {
   return res.status(204).json();
 };
 
+const searchAPost = async (req, res) => {
+  const query = req.query.q;
+  const result = await searchPost(query);
+  res.status(200).json(result.message);
+};
+
 module.exports = {
     createPostCont,
     getAllPosts,
     getPost,
     UpdateAPost,
     deleteApost,
+    searchAPost,
 };

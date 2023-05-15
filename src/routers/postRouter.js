@@ -4,7 +4,7 @@ const { validadeNewPost, validateUpdatePost } = require('../middlewares/postMidd
 const { tokenVerify } = require('../middlewares/tokenMiddle');
 
 const { createPostCont, getAllPosts,
-     getPost, UpdateAPost, deleteApost } = require('../controllers/post.controller');
+     getPost, UpdateAPost, deleteApost, searchAPost } = require('../controllers/post.controller');
 
 const postRouter = express.Router();
 
@@ -13,6 +13,12 @@ postRouter.post(
 tokenVerify,
 validadeNewPost,
 createPostCont,
+);
+
+postRouter.get(
+'/search',
+tokenVerify,
+searchAPost,
 );
 
 postRouter.get(
